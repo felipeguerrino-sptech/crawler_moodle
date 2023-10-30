@@ -1,13 +1,22 @@
 from time import sleep
 
+import os
 import getpass
+import wget
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 def main():
-    ra = input('Insira o RA: ')
-    senha = getpass.getpass(prompt='Insira a senha: ')
-    get_github_token(ra, senha)
+    os.system("sh verify-selenium.sh")
+    with open('./log.txt', 'r') as f:
+        if f.read() == "False\n":
+            print("Webdriver não encontrado...")
+            print("Instalando webdriver...")
+            install_webdriver()
+        else:
+            ra = input('Insira o RA: ')
+            senha = getpass.getpass(prompt='Insira a senha: ')
+            get_github_token(ra, senha)
     
 
 def get_github_token(ra, senha):
@@ -33,5 +42,8 @@ def get_github_token(ra, senha):
     sleep(2)
     driver.close()
 
+def install_webdriver():
+    wget.download('https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip')
+    os.system('unzip ./chromedriver_linux64.zip')
 if __name__ == '__main__':
     main()

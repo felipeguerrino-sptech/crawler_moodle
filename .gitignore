@@ -160,3 +160,7 @@ cython_debug/
 #.idea/
 
 github.txt
+log.txt
+*.zip
+chromedriver
+*.chromedriver
