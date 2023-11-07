@@ -7,6 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 def main():
+    os.system("pip install -r requirements.txt")
     os.system("sh verify-selenium.sh")
     with open('./log.txt', 'r') as f:
         if f.read() == "False\n":
